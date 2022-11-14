@@ -4,7 +4,7 @@ import java.util.LinkedList;
 
 public class MyStack {
 
-    private LinkedList<String> data = new LinkedList<>();
+    private final LinkedList<String> data = new LinkedList<>();
 
     public MyStack() {
         data.push("Item 1");
