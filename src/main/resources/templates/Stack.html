@@ -19,24 +19,42 @@
         <p>
             <button type="submit"
                     th:name="todo"
-                    th:value="Push">Push</button>&nbsp;
+                    th:value="Push">Push&nbsp;&darr;</button>&nbsp;
             <button type="submit"
                     th:name="todo"
                     th:value="Pop"
-                    th:unless="${session.stack.isEmpty()}">Pop</button>
+                    th:unless="${session.stack.isEmpty()}">Pop&nbsp;&uarr;</button>
         </p>
     </form>
 
     <div th:unless="${session.stack.isEmpty()}">
-        <h3 class="card-title">Stack Content</h3>
-        <ul>
-            <li th:each="s: ${session.stack.data}"
-                th:text="${s}">Item</li>
-        </ul>
+        <h3>Stack Content</h3>
+        <table>
+            <tr>
+                <th>Count</th>
+                <th>Value</th>
+            </tr>
+            <!--/*-->
+            <tr>
+                <td>3</td>
+                <td>Item-3</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Item-2</td>
+            </tr>
+            <!--*/-->
+            <tr th:each="item: ${session.stack.items}">
+                <td th:text="${item.count}">1</td>
+                <td th:text="${item.value}">Item-1</td>
+            </tr>
+        </table>
     </div>
-    <div th:if="${session.stack.isEmpty()}">
-        <h3> Empty Stack </h3>
-    </div>
+    <!--/*/
+    <p th:if="${session.stack.isEmpty()}" class="message">
+        The Stack Is Empty
+    </p>
+    /*/-->
 </main>
 <footer>
     Sheridan College&nbsp;&nbsp;<span class='hart'>&#9825;</span>&nbsp;&nbsp;2023
