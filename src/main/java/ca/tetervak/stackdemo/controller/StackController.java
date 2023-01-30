@@ -16,7 +16,7 @@ public class StackController {
 
     private final Logger log = LoggerFactory.getLogger(StackController.class);
 
-    @Resource(name = "stackData")
+    @Resource
     StackData stackData;
 
     @GetMapping(value = {"/", "/stack"})
