@@ -1,10 +1,11 @@
 package ca.tetervak.stackdemo.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-public class StackData {
+public class StackData implements Serializable {
 
     private final LinkedList<String> list = new LinkedList<>();
 
