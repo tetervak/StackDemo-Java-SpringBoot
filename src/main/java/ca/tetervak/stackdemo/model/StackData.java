@@ -29,9 +29,7 @@ public class StackData implements Serializable {
     }
 
     public synchronized void push(String value){
-        synchronized (list){
-            list.push(value);
-        }
+        list.push(value);
     }
 
     public synchronized List<StackItem> getItems(){
