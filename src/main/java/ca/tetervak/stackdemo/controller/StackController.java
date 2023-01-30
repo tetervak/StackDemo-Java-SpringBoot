@@ -19,13 +19,13 @@ public class StackController {
     @Resource(name = "stackData")
     StackData stackData;
 
-    @GetMapping(value={"/", "/stack"})
+    @GetMapping(value = {"/", "/stack"})
     public String index(
             @RequestParam(defaultValue = "") String popped,
             Model model
-    ){
+    ) {
         log.trace("index() is called");
-        log.debug("popped = " + (popped.isEmpty()?"empty":popped));
+        log.debug("popped = " + (popped.isEmpty() ? "empty" : popped));
         model.addAttribute("items", stackData.getItems());
         model.addAttribute("popped", popped);
         return "Stack";
@@ -35,21 +35,21 @@ public class StackController {
     public String process(
             @RequestParam String todo,
             @RequestParam(defaultValue = "") String pushed
-    ){
+    ) {
         log.trace("process() is called");
         log.debug("todo = " + todo);
-        if (todo.equals("Push")){
-            if(!pushed.trim().isEmpty()){
+        if (todo.equals("Push")) {
+            if (!pushed.trim().isEmpty()) {
                 stackData.push(pushed);
                 log.debug("the value [" + pushed + "] is pushed");
             }
-        }else if (todo.equals("Pop")){
-            if(!stackData.isEmpty()){
+        } else if (todo.equals("Pop")) {
+            if (!stackData.isEmpty()) {
                 String popped = stackData.pop();
                 log.debug("the value [" + popped + "] is popped");
                 return "redirect:stack?popped=" + popped;
             }
         }
-       return "redirect:stack";
+        return "redirect:stack";
     }
 }
