@@ -2,10 +2,10 @@ package ca.tetervak.stackdemo.controller;
 
 import ca.tetervak.stackdemo.model.StackData;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 
@@ -16,16 +16,20 @@ public class StackController {
     StackData stackData;
 
     @GetMapping(value={"/", "/stack"})
-    public ModelAndView index(){
-        return new ModelAndView("Stack", "items", stackData.getItems());
+    public String index(
+            @RequestParam(defaultValue = "") String popped,
+            Model model
+    ){
+        model.addAttribute("items", stackData.getItems());
+        model.addAttribute("popped", popped);
+        return "Stack";
     }
 
     @PostMapping("/process")
-    public ModelAndView process(
+    public String process(
             @RequestParam String todo,
             @RequestParam(defaultValue = "") String pushed
     ){
-        ModelAndView mv = new ModelAndView("Stack");
         if (todo.equals("Push")){
             if(!pushed.trim().isEmpty()){
                 stackData.push(pushed);
@@ -33,10 +37,9 @@ public class StackController {
         }else if (todo.equals("Pop")){
             if(!stackData.isEmpty()){
                 String popped = stackData.pop();
-                mv.addObject("popped", popped);
+                return "redirect:stack?popped=" + popped;
             }
         }
-        mv.addObject("items", stackData.getItems());
-        return mv;
+       return "redirect:stack";
     }
 }
