@@ -23,11 +23,11 @@
             <button type="submit"
                     th:name="todo"
                     th:value="Pop"
-                    th:unless="${session.stack.isEmpty()}">Pop&nbsp;&uarr;</button>
+                    th:unless="${items.isEmpty()}">Pop&nbsp;&uarr;</button>
         </p>
     </form>
 
-    <div th:unless="${session.stack.isEmpty()}">
+    <div th:unless="${items.isEmpty()}">
         <h3>Stack Content</h3>
         <table>
             <tr>
@@ -44,14 +44,14 @@
                 <td>Item-2</td>
             </tr>
             <!--*/-->
-            <tr th:each="item: ${session.stack.items}">
+            <tr th:each="item: ${items}">
                 <td th:text="${item.count}">1</td>
                 <td th:text="${item.value}">Item-1</td>
             </tr>
         </table>
     </div>
     <!--/*/
-    <p th:if="${session.stack.isEmpty()}" class="message">
+    <p th:if="${items.isEmpty()}" class="message">
         The Stack Is Empty
     </p>
     /*/-->

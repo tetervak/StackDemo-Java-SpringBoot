@@ -1,10 +1,15 @@
 package ca.tetervak.stackdemo.model;
 
+import org.springframework.stereotype.Component;
+import org.springframework.web.context.annotation.SessionScope;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+@Component
+@SessionScope
 public class StackData implements Serializable {
 
     private final LinkedList<String> list = new LinkedList<>();
@@ -29,7 +34,7 @@ public class StackData implements Serializable {
         }
     }
 
-    public synchronized Iterable<StackItem> getItems(){
+    public synchronized List<StackItem> getItems(){
         int count = list.size();
         List<StackItem> items = new ArrayList<>(count);
         for(String value: list){
