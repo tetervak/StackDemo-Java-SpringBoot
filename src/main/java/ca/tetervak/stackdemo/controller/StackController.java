@@ -18,15 +18,12 @@ public class StackController {
 
     @GetMapping(value = {"/", "/stack"})
     public String displayStack(
-            HttpSession session,
-            @RequestParam(defaultValue = "") String popped,
-            Model model
+            Model model,
+            HttpSession session
     ) {
         log.trace("displayStack() is called");
-        log.debug("popped = " + (popped.isEmpty() ? "empty" : popped));
         StackData stack = getStackData(session);
         model.addAttribute("items", stack.getItems());
-        model.addAttribute("popped", popped);
         return "Stack";
     }
 
