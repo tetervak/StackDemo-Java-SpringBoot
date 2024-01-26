@@ -1,7 +1,6 @@
 package ca.tetervak.stackdemo.model;
 
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.annotation.SessionScope;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -9,7 +8,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 @Component
-@SessionScope
 public class StackData implements Serializable {
 
     private final LinkedList<String> list = new LinkedList<>();
