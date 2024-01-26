@@ -43,27 +43,31 @@ public class StackController {
         return stack;
     }
 
-    @PostMapping("/process")
+    @GetMapping("/process")
     public String processInput(
             @RequestParam String todo,
             @RequestParam(defaultValue = "") String pushed,
+            Model model,
             HttpSession session
     ) {
         log.trace("processInput() is called");
         log.debug("todo = " + todo);
         StackData stack = getStackData(session);
+
         if (todo.equals("Push")) {
             if (!pushed.trim().isEmpty()) {
                 stack.push(pushed);
                 log.debug("the value [" + pushed + "] is pushed");
+                model.addAttribute("popped", "");
             }
         } else if (todo.equals("Pop")) {
             if (!stack.isEmpty()) {
                 String popped = stack.pop();
                 log.debug("the value [" + popped + "] is popped");
-                return "redirect:stack?popped=" + popped;
+                model.addAttribute("popped", popped);
             }
         }
-        return "redirect:stack";
+        model.addAttribute("items", stack.getItems());
+        return "Stack";
     }
 }
