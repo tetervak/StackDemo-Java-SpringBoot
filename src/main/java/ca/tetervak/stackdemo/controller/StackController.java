@@ -17,7 +17,7 @@ public class StackController {
 
 
     @GetMapping(value = {"/", "/stack"})
-    public String index(
+    public String displayStack(
             HttpSession session,
             @RequestParam(defaultValue = "") String popped,
             Model model
@@ -40,7 +40,7 @@ public class StackController {
     }
 
     @PostMapping("/process")
-    public String process(
+    public String processInput(
             @RequestParam String todo,
             @RequestParam(defaultValue = "") String pushed,
             HttpSession session
