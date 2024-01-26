@@ -22,7 +22,7 @@ public class StackController {
             @RequestParam(defaultValue = "") String popped,
             Model model
     ) {
-        log.trace("index() is called");
+        log.trace("displayStack() is called");
         log.debug("popped = " + (popped.isEmpty() ? "empty" : popped));
         StackData stack = getStackData(session);
         model.addAttribute("items", stack.getItems());
@@ -30,11 +30,15 @@ public class StackController {
         return "Stack";
     }
 
-    private static StackData getStackData(HttpSession session) {
+    private StackData getStackData(HttpSession session) {
+        log.trace("getStackData() is called");
         StackData stack = (StackData) session.getAttribute("stack");
         if(stack == null){
+            log.trace("StackData is not found in the Session; making new StackData");
             stack = new StackData();
             session.setAttribute("stack", stack);
+        }else{
+            log.trace("Previous StackData is found in the Session");
         }
         return stack;
     }
@@ -45,7 +49,7 @@ public class StackController {
             @RequestParam(defaultValue = "") String pushed,
             HttpSession session
     ) {
-        log.trace("process() is called");
+        log.trace("processInput() is called");
         log.debug("todo = " + todo);
         StackData stack = getStackData(session);
         if (todo.equals("Push")) {
