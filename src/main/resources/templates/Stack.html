@@ -11,7 +11,7 @@
     <h1>Stack Demo</h1>
 </header>
 <main>
-    <form method="get" action="Stack.html" th:action="@{process}">
+    <form method="post" action="Stack.html" th:action="@{process}">
         <p class="form-group">
             <label for="p">Value</label>
             <input id="p" name="pushed" th:value="${popped}" style="width: 5em;">
