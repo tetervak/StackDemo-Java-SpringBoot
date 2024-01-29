@@ -18,11 +18,14 @@ public class StackData implements Serializable {
         list.push("Item-3");
     }
 
-    public synchronized String pop() {
-        if (list.isEmpty()) {
-            return null;
-        } else {
-            return list.pop();
+    public String pop() {
+        // the same as "public synchronized String pop()"
+        synchronized (this) {
+            if (list.isEmpty()) {
+                return null;
+            } else {
+                return list.pop();
+            }
         }
     }
 
