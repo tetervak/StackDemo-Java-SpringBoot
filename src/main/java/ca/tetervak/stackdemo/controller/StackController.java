@@ -15,7 +15,7 @@ public class StackController {
     private final Logger log = LoggerFactory.getLogger(StackController.class);
 
 
-    @GetMapping(value = {"/", "/stack"})
+    @GetMapping("/")
     public String displayStack(
             Model model,
             HttpSession session
